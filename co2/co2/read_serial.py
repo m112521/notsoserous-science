@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
 
-PORT = 'COM10'
+PORT = 'COM5'
 plant_number = 0
 people_number = 1
 

@@ -1,4 +1,5 @@
 #include "Adafruit_CCS811.h"
+constexpr auto pinSensor = A0;
  
 Adafruit_CCS811 ccs;
  
@@ -11,11 +12,14 @@ void setup() {
 }
  
 void loop() {
+  int valueSensor = analogRead(pinSensor);
   if(ccs.available()) {
     if(!ccs.readData()) {
       Serial.print(ccs.geteCO2());
       Serial.print(",");
-      Serial.println(ccs.getTVOC());
+      Serial.print(ccs.getTVOC());
+      Serial.print(",");
+      Serial.println(valueSensor);
     } else {
       Serial.println("ERROR...");
       while(1);
