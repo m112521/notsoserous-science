@@ -16,10 +16,10 @@ PORT = 'COM5'
 plant_number = 0
 people_number = 1
 
-#ser = serial.Serial(PORT, 9600, timeout=1)
+ser = serial.Serial(PORT, 9600, timeout=1)
 time.sleep(2)
 
-df = pd.DataFrame([], columns=["CO2", "TVOC", "Moisture", "datetime"])
+df = pd.DataFrame([], columns=["CO2", "Light", "Moisture", "Datetime"])
 
 # realtime plot
 xs = []  
@@ -42,9 +42,9 @@ def read_serial_data():
 
         line = ser.readline().decode()
         if (len(parse_serial(line))):
-            co2, tvoc, moisture = parse_serial(line)
-            print(co2, tvoc, moisture)
-            add_row_df([int(co2), int(tvoc), int(moisture), datetime.now()])
+            co2, light, moisture = parse_serial(line)
+            print(co2, light, moisture)
+            add_row_df([int(co2), int(light), int(moisture), datetime.now()])
             
 
 def parse_serial(line):
@@ -71,10 +71,10 @@ def read_csv(filename):
 def plot_static():
     x = df["datetime"].values.tolist()
     y = df["CO2"].values.tolist()
-    z = df["TVOC"].values.tolist()
+    z = df["Moisture"].values.tolist()
     u = df["Moisture"].values.tolist()
     plt.plot(x, y, label="CO2", color="red")
-    plt.plot(x, z, label="TVOC", color="black")
+    plt.plot(x, u, label="Light", color="black")
     plt.plot(x, u, label="Moist", color="blue")
     plt.xlabel('Datetime', fontsize=8)
 

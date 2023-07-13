@@ -6,8 +6,8 @@ import pandas as pd
 import time, threading
 
 
-PORT = 'COM5'
-df = pd.DataFrame([], columns=["Light", "Moisture", "Datetime"])
+PORT = 'COM6'
+df = pd.DataFrame([], columns=["Light", "Moisture", "CO2", "Datetime"])
 
 ser = serial.Serial(PORT, 9600, timeout=1)
 time.sleep(2)
@@ -16,7 +16,7 @@ time.sleep(2)
 def read_serial_timer():
     #print(time.ctime())
     line = ser.readline().decode()
-    if (len(parse_serial(line))):
+    if (len(parse_serial(line)) == 3):
         light, moisture = parse_serial(line)
         print(light, moisture)
         add_row_df([int(light), int(moisture), datetime.now()])
@@ -32,12 +32,12 @@ def read_serial_data():
             break 
 
         line = ser.readline().decode()
-        if (len(parse_serial(line))):
-            light, moisture = parse_serial(line)
-            print(light, moisture)
-            add_row_df([int(light), int(moisture), datetime.now()])
+        if (len(parse_serial(line)) == 3):
+            light, moisture, co2 = parse_serial(line)
+            print(light, moisture, co2)
+            add_row_df([int(light), int(moisture), int(co2), datetime.now()])
         
-        time.sleep(10)
+        #time.sleep(10)
 
 
 def save_csv():
@@ -55,13 +55,15 @@ def add_row_df(vals):
 def plot_static():
     x = df["Light"].values.tolist()
     y = df["Moisture"].values.tolist()
+    z = df["CO2"].values.tolist()
     u = df["Datetime"].values.tolist()
-    plt.plot(x, u, label="Light", color="red")
-    plt.plot(y, u, label="Moist", color="blue")
+    plt.plot(u, x, label="Light", color="red")
+    plt.plot(u, y, label="Moist", color="blue")
+    plt.plot(u, z, label="CO2", color="black")
     plt.xlabel('Datetime', fontsize=8)
 
     plt.ylabel('Units, ppm')
-    plt.title('Kight/Moist vs. Datetime', fontsize=20)
+    plt.title('Light/Moist/CO2 vs. Datetime', fontsize=20)
     plt.legend()
     plt.xticks(rotation = 60)
     plt.tight_layout()
