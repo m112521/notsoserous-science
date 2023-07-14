@@ -6,7 +6,7 @@ import pandas as pd
 import time, threading
 
 
-PORT = 'COM6'
+PORT = 'COM14'
 df = pd.DataFrame([], columns=["Light", "Moisture", "CO2", "Datetime"])
 
 ser = serial.Serial(PORT, 9600, timeout=1)
@@ -26,18 +26,19 @@ def read_serial_timer():
 
 def read_serial_data():
     while True:
-        if keyboard.read_key() == "p":
-            save_csv()
-            plot_static()
-            break 
-
+        
         line = ser.readline().decode()
         if (len(parse_serial(line)) == 3):
             light, moisture, co2 = parse_serial(line)
             print(light, moisture, co2)
-            add_row_df([int(light), int(moisture), int(co2), datetime.now()])
+            if light != '' and moisture != '' and co2 != '':
+                add_row_df([int(light), int(moisture), int(co2), datetime.now()])
         
-        #time.sleep(10)
+            if keyboard.is_pressed('q'):
+                save_csv()
+                plot_static()
+                break 
+        time.sleep(10)
 
 
 def save_csv():
