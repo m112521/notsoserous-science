@@ -1,6 +1,5 @@
 # Fablab Science Fest activitis
 
-
 Tested:
 
 * [ ] CO2+Photoresistor+Temp+SoilHumidity for plants
@@ -11,8 +10,6 @@ Tested:
 * [ ] Propeller geometry vs lift
 * [ ] Microgravity vs seed growth direction
 
-
-
 TBD:
 
 * [ ] SLA tensile/compressive/bending strength vs printing settings
@@ -22,6 +19,7 @@ TBD:
 * [ ] LDM glass powder vs heat treatment
 * [ ] LMD clay printing compressive strength vs geometry
 * [ ] Acoustic metamaterials
+* [ ] Propeller vs noise
 * [ ] *Cutting tool design
 * [ ] *ECG heart rate
 * [ ] *PCB conductivity or multilayer PCB
