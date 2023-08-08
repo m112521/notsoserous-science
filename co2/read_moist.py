@@ -5,6 +5,7 @@ import keyboard
 import pandas as pd
 import time, threading
 
+state = True
 
 PORT = 'COM14'
 df = pd.DataFrame([], columns=["Light", "Moisture", "CO2", "Datetime"])
@@ -13,36 +14,39 @@ ser = serial.Serial(PORT, 9600, timeout=1)
 time.sleep(2)
 
 
-def read_serial_timer():
-    #print(time.ctime())
-    line = ser.readline().decode()
-    if (len(parse_serial(line)) == 3):
-        light, moisture = parse_serial(line)
-        print(light, moisture)
-        add_row_df([int(light), int(moisture), datetime.now()])
-    
-    threading.Timer(10, read_serial_timer).start()
-
 
 def read_serial_data():
+    global state
     while True:
-        
-        line = ser.readline().decode()
-        if (len(parse_serial(line)) == 3):
-            light, moisture, co2 = parse_serial(line)
-            print(light, moisture, co2)
-            if light != '' and moisture != '' and co2 != '':
-                add_row_df([int(light), int(moisture), int(co2), datetime.now()])
-        
-            if keyboard.is_pressed('q'):
-                save_csv()
-                plot_static()
-                break 
-        time.sleep(10)
+        if keyboard.is_pressed('q'):
+            break
+
+        try:
+            line = ser.readline().decode()
+            if (len(parse_serial(line)) == 3):
+                light, moisture, co2 = parse_serial(line)
+                print(light, moisture, co2)
+                if light.strip() != '' and moisture.strip() != '' and co2.strip() != '':
+                    add_row_df([int(light), int(moisture), int(co2), datetime.now()])
+                    if state:
+                        state = False
+                        scheduled()
+            
+                    
+        except:
+            continue
+
+    time.sleep(10)
+
+def scheduled():
+    save_csv()
+    plot_static()
+    #df = df.iloc[0:0]
+    threading.Timer(3600, scheduled).start()
 
 
 def save_csv():
-    df.to_csv("data.csv", index=False)
+    df.to_csv(f"data-{int(time.time())}.csv", index=False)
 
 
 def parse_serial(line):
@@ -63,15 +67,16 @@ def plot_static():
     plt.plot(u, z, label="CO2", color="black")
     plt.xlabel('Datetime', fontsize=8)
 
-    plt.ylabel('Units, ppm')
+    plt.ylabel('Units')
     plt.title('Light/Moist/CO2 vs. Datetime', fontsize=20)
     plt.legend()
     plt.xticks(rotation = 60)
     plt.tight_layout()
 
-    #plt.autoscale()
+    plt.autoscale()
     plt.savefig(f"plot-{int(time.time())}.png")
-    plt.show()
+    plt.clf()
+    #plt.show()
 
 
 if __name__ == "__main__":
