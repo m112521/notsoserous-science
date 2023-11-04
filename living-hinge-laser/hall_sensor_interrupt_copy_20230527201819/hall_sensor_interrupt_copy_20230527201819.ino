@@ -20,7 +20,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(HALL_PIN), countCycles, RISING);
   Serial.begin(9600);
   qd.begin();
-  //qd.displayClear();
+  qd.displayClear();
   qd.displayInt(0);
 
   // START MOTOR  
