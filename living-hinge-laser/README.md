@@ -1,29 +1,46 @@
-# Fatigue testing machine
-
-![persp](https://github.com/m112521/notsoserous-science/assets/85460283/c4cb47e4-6cf4-4d17-a4c5-280009308a05)
-
-Hardware:
-
-- Amperka Iskra Neo (Leonardo);
-- Hall sensor;
-- Amperka Quad Display;
-- Troyka Shield;
-
-
-Features:
-- autamatic cycles counting;
-- automatic stop;
-
+# Fatigue strength testing machine
 
 TDB:
 - [ ] start button/tumbler;
-- [ ] better stop mechanism;
+- [ ] better/faster stop mechanism;
 - [ ] PCB;
 - [ ] bigger motor;
 - [ ] better on-shaft fixation;
 
 
-Test video
+![persp](https://github.com/m112521/notsoserous-science/assets/85460283/c4cb47e4-6cf4-4d17-a4c5-280009308a05)
+
+## Description
+
+Machine for determining the fatigue strength of samples with different patterns (so-called "living hinge", which makes sample exert flexibility) produced using a laser machine.
+
+Hardware:
+
+- Amperka Iskra Neo (Leonardo);
+- Amperka Motor Shield;
+- Amperka Troyka Shield;
+- Hall sensor (involved into counting cycles);
+- Amperka Quad Display.
+
+Features:
+- autamatic cycle counting;
+- automatic stop (altough with delay).
+
+## Generating samples
+
+Grasshopper definition was designed to make it easier to create different patterns:
+
+![def](https://github.com/m112521/notsoserous-science/assets/85460283/a8c173b4-ee69-4f65-a47c-f07b98875a5b)
+
+
+The process of generating new samples: 
+
+![gh-sim](https://github.com/m112521/notsoserous-science/assets/85460283/0fa1caf4-b1d9-4dbc-b486-403aa12baab0)
+
+
+## Testing sample
+
+If you wait long enough - it breaks (either sample or machine). 
 
 https://github.com/m112521/notsoserous-science/assets/85460283/56accc54-1f78-4390-a13b-5404003ea0d3
 
