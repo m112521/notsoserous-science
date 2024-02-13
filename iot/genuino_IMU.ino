@@ -18,6 +18,8 @@ void setup() {
   CurieIMU.autoCalibrateAccelerometerOffset(X_AXIS, 0);
   CurieIMU.autoCalibrateAccelerometerOffset(Y_AXIS, 0);
   CurieIMU.autoCalibrateAccelerometerOffset(Z_AXIS, 1);
+
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -28,7 +30,14 @@ void loop() {
   roll = filter.getRoll();
 
   if (roll > 100) {
-    tone(8, 1024, 100);
-    delay(100);
+    //tone(8, 1024, 100);
+    //delay(100);
+    Serial.println("Left");
+  }
+  else if (roll < -50) {
+    Serial.println("Right");
+  }
+  else if (roll > -5 && roll < 5) {
+    Serial.println("Center");
   }
 }
