@@ -1,0 +1,19 @@
+import cv2
+
+from teachable_machine import TeachableMachine
+
+cap = cv2.VideoCapture(0)
+model = TeachableMachine(model_path="model/keras_model.h5", labels_file_path="model/labels.txt")
+
+image_path = "screen.jpg"
+while True:
+    _, frame = cap.read()
+    cv2.imwrite(image_path, frame)
+    prediction = model.classify_image(image_path)
+    print(prediction["class_name"], prediction["class_confidence"])
+    cv2.imshow("v", frame)
+    if cv2.waitKey(1) & 0xFF==ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()

@@ -1,0 +1,10 @@
+conda create --name tm-opencv Python=3.8
+
+
+conda activate tm-opencv
+
+
+pip install opencv-python
+
+
+pip install teachable-machine
