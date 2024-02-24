@@ -1,5 +1,6 @@
 # Legged servo bot
 
+![photo_5391076090363107465_y](https://github.com/m112521/notsoserous-science/assets/85460283/194b444e-faa5-475c-a7ba-40270d74ce5b)
 
 ### Amperka MultiServo Shield
 
