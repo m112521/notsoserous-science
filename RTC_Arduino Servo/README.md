@@ -5,6 +5,7 @@ BOM:
 - Mg995
 - Arduino Uno
 - RGB LED
+- TinyRTC 
 - *Buzzer
 
 ![Assembly](Assembly.jpg)
