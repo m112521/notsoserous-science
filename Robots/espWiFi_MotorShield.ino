@@ -113,6 +113,10 @@ const char index_html[] PROGMEM = R"rawliteral(
         <div class="div4"><button id="buttonR" class="button">Right</button></div>
         <div class="div5"><button id="buttonB" class="button">Backward</button></div>
         </div>
+        <div>
+          <button id="servoUp" class="button">UP</button>
+          <button id="servoDown" class="button">DOWN</button>
+        </div>
     </div>
   </div>
 <script>
@@ -162,6 +166,14 @@ const char index_html[] PROGMEM = R"rawliteral(
     document.getElementById('buttonL').addEventListener('click', leftMove);
     document.getElementById('buttonR').addEventListener('click', rightMove);
     document.getElementById('buttonB').addEventListener('click', backwardMove);
+    document.getElementById('buttonUp').addEventListener('click', servoUp);
+    document.getElementById('buttonDown').addEventListener('click', servoDown);
+  }
+  function servoUp(){
+    websocket.send('u');
+  }
+  function servoDown(){
+    websocket.send('d');
   }
   function forwardMove(){
     websocket.send('f');
@@ -210,6 +222,14 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len) {
     }
     else if (strcmp((char*)data, "b") == 0) {
       moveState = 9;
+      notifyClients();
+    }
+    else if (strcmp((char*)data, "u") == 0) {
+      moveState = 4;
+      notifyClients();
+    }
+    else if (strcmp((char*)data, "d") == 0) {
+      moveState = 3;
       notifyClients();
     }
   }
