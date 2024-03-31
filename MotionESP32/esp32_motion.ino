@@ -5,15 +5,15 @@
 
 // Replace with your network credentials
 const char* ssid = "GalaxyAzamat";
-const char* password = "vhrg8328";
+const char* password = "";
 
 // Initialize Telegram BOT
-#define BOTtoken "6824471682:AAF4zo__paKIKG2CYvmK4HibpkrwaBDKK5I"  // your Bot Token (Get from Botfather)
+#define BOTtoken ""  // your Bot Token (Get from Botfather)
 
 // Use @myidbot to find out the chat ID of an individual or a group
 // Also note that you need to click "start" on a bot before it can
 // message you
-#define CHAT_ID "426400032"
+#define CHAT_ID ""
 
 X509List cert(TELEGRAM_CERTIFICATE_ROOT);
 WiFiClientSecure client;
