@@ -25,3 +25,12 @@ delay(200);
 
 noTone(PinBuzzer); 
 ```
+
+LED RGB:
+
+```c++
+analogWrite(PIN_RED,   0);
+analogWrite(PIN_GREEN, 201);
+analogWrite(PIN_BLUE,  204);
+
+```
