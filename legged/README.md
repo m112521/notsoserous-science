@@ -4,7 +4,8 @@
 
 ### ESP32 ServoShield
 
-![pcb](https://github.com/m112521/notsoserous-science/assets/85460283/6bd172e2-5d91-4516-843a-040517341e50)
+![pcb](https://github.com/m112521/notsoserous-science/assets/85460283/5788673d-ac47-4091-ba2c-997e8df0f262)
+
 
 
 
