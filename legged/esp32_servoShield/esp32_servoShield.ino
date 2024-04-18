@@ -32,23 +32,29 @@ void setup() {
 	// using default min/max of 1000us and 2000us
 	// different servos may require different min/max settings
 	// for an accurate 0 to 180 sweep
+
+  myservo.write(0);    // tell servo to go to position in variable 'pos'
+  myservo2.write(0);
+  myservo3.write(0);
+  myservo4.write(0);
+
+  delay(5000);
 }
 
 void loop() {
-
-	for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
+	for (pos = 0; pos <= 90; pos += 1) { // goes from 0 degrees to 180 degrees
 		// in steps of 1 degree
 		myservo.write(pos);    // tell servo to go to position in variable 'pos'
     myservo2.write(pos);
     myservo3.write(pos);
     myservo4.write(pos);
-		delay(15);             // waits 15ms for the servo to reach the position
+		delay(5);             // waits 15ms for the servo to reach the position
 	}
-	for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+	for (pos = 90; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
 		myservo.write(pos);
     myservo2.write(pos);
     myservo3.write(pos);
     myservo4.write(pos);   // tell servo to go to position in variable 'pos'
-		delay(15);             // waits 15ms for the servo to reach the position
+		delay(5);             // waits 15ms for the servo to reach the position
 	}
 }
