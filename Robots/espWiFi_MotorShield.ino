@@ -166,8 +166,8 @@ const char index_html[] PROGMEM = R"rawliteral(
     document.getElementById('buttonL').addEventListener('click', leftMove);
     document.getElementById('buttonR').addEventListener('click', rightMove);
     document.getElementById('buttonB').addEventListener('click', backwardMove);
-    document.getElementById('buttonUp').addEventListener('click', servoUp);
-    document.getElementById('buttonDown').addEventListener('click', servoDown);
+    document.getElementById('servoUp').addEventListener('click', servoUp);
+    document.getElementById('servoDown').addEventListener('click', servoDown);
   }
   function servoUp(){
     websocket.send('u');
