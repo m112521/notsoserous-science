@@ -9,6 +9,9 @@
 ### Related
 
 - https://github.com/bogde/HX711
+- https://www.reddit.com/r/3Dprinting/comments/hfjw73/3d_printed_springs/?rdt=42547
+- https://www.instructables.com/Spring-Testing-Machine/
+- https://www.instructables.com/Build-a-Build-a-Digital-Weight-Scale-Force-Guage/
 
 Calibration:
 
