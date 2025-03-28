@@ -10,7 +10,7 @@
 Adafruit_BME280 bme; // I2C
 unsigned long delayTime;
 
-uint8_t broadcastAddress1[] = {0x88, 0x13, 0xBF, 0x0D, 0x5A, 0x14};
+uint8_t broadcastAddress1[] = {0xCC, 0xDB, 0xA7, 0x2D, 0xD4, 0x8C};
 
 typedef struct data_struct {
   int altitude;
