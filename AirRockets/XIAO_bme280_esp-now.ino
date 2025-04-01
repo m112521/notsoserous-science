@@ -4,12 +4,17 @@
 #include <Adafruit_BME280.h>
 #include <esp_now.h>
 #include <WiFi.h>
+#include <ESP32Servo.h>
 
 #define SEALEVELPRESSURE_HPA (1013.25)
+#define SERVO1_PIN D0
+
+Servo servo1;
 
 Adafruit_BME280 bme; // I2C
 unsigned long delayTime;
 
+//CC:DB:A7:2D:D4:8C
 uint8_t broadcastAddress1[] = {0xCC, 0xDB, 0xA7, 0x2D, 0xD4, 0x8C};
 
 typedef struct data_struct {
@@ -34,7 +39,9 @@ void setup() {
   while(!Serial);    // time to get serial running
   Serial.println(F("BME280 test"));
   bme.begin(0x76);  
-  delayTime = 100;
+  delayTime = 1000;
+
+  servo1.attach(SERVO1_PIN);
 
   WiFi.mode(WIFI_STA);
  
@@ -59,8 +66,11 @@ void loop() {
   printValues();
   data.altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
   esp_err_t result = esp_now_send(0, (uint8_t *) &data, sizeof(data));
-  
+   
+  servo1.write(0);
   delay(delayTime);
+  servo1.write(180);
+  delay(1000);
 }
 
 
