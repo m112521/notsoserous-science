@@ -57,6 +57,8 @@ void setup() {
   Serial.println(F("BME280 test"));
   bme.begin(0x76);
 
+  servo1.attach(SERVO1_PIN);
+
   WiFi.mode(WIFI_STA);
   if (esp_now_init() != ESP_OK) {
     Serial.println("Error initializing ESP-NOW");
@@ -94,7 +96,7 @@ void loop() {
     Serial.println("Error sending the data");
   }
 
-  servo1.write(incomingServo);
+  servo1.write(45);
   Serial.println(incomingServo);
 
   delay(500);
