@@ -8,6 +8,12 @@
 | SDA | D4   |
 | SDD | -    |
 
+| Servo SG90    | XIAO/LiPo|
+| -------- | ------- |
+| S | XIAO D0  |
+| V | LiPo+ (red wire)  |
+| G | XIAO/BME?LiPo GND  |
+
 
 Issues:
 
