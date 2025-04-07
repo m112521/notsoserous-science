@@ -12,3 +12,6 @@
 Issues:
 
 #1: IF error on upload: hold B (boot) -> press and release R (reset) -> release B
+
+
+WARNING: Servo is SGV (!not SVG) on the RocketPCB
