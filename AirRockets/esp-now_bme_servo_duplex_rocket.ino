@@ -1,4 +1,3 @@
-/* XIAO_ROCKET CODE */
 #include <esp_now.h>
 #include <WiFi.h>
 #include <Wire.h>
@@ -54,15 +53,17 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
 void setup() {
   Serial.begin(115200);
+  while(!Serial);
+  Serial.println(F("BME280 test"));
+  bme.begin(0x76);
+
   WiFi.mode(WIFI_STA);
-  // Init ESP-NOW
   if (esp_now_init() != ESP_OK) {
     Serial.println("Error initializing ESP-NOW");
     return;
   }
 
   esp_now_register_send_cb(OnDataSent);
-  // Register peer
   memcpy(peerInfo.peer_addr, broadcastAddress, 6);
   peerInfo.channel = 0;  
   peerInfo.encrypt = false;
@@ -94,7 +95,7 @@ void loop() {
   }
 
   servo1.write(incomingServo);
+  Serial.println(incomingServo);
 
-  delay(1000);
+  delay(500);
 }
-
