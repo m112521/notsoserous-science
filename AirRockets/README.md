@@ -12,7 +12,7 @@
 | -------- | ------- |
 | S | XIAO D0  |
 | V | LiPo+ (red wire)  |
-| G | XIAO/BME/LiPo GND  |
+| G | common GND  |
 
 
 Issues:
