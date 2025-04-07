@@ -96,8 +96,9 @@ void loop() {
     Serial.println("Error sending the data");
   }
 
-  servo1.write(45);
+  servo1.write(int(incomingServo));
   Serial.println(incomingServo);
 
   delay(500);
 }
+
