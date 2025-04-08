@@ -10,7 +10,7 @@
 
 | Servo SG90    | XIAO/LiPo|
 | -------- | ------- |
-| S | XIAO D0  |
+| S | XIAO D1  |
 | V | LiPo+ (red wire)  |
 | G | common GND  |
 
