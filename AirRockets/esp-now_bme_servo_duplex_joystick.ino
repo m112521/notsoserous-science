@@ -2,15 +2,17 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
-// XIAO: 
-uint8_t broadcastAddress[] = {0x64, 0xE8, 0x33, 0x84, 0x86, 0xB0};
+// XIAO_USED: 
+// XIAO_NOT_USED: 64:E8:33:80:89:18
+// XIAO_NEW: 
+uint8_t broadcastAddress[] = {0x64, 0xE8, 0x33, 0x80, 0xA7, 0x80};
+
 
 int incomingAltitude;
 int incomingTemp;
 int incomingHum;
 int incomingPres;
 
-// Variable to store if sending data was successful
 String success;
 
 typedef struct struct_received {
@@ -30,8 +32,8 @@ struct_received incomingReadings;
 esp_now_peer_info_t peerInfo;
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-  Serial.print("\r\nLast Packet Send Status:\t");
-  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+  //Serial.print("\r\nLast Packet Send Status:\t");
+  //Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
   if (status ==0){
     success = "Delivery Success :)";
   }
@@ -42,8 +44,9 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&incomingReadings, incomingData, sizeof(incomingReadings));
-  Serial.print("Bytes received: ");
-  Serial.println(len);
+  //Serial.print("Bytes received: ");
+  //Serial.println(len);
+  
   incomingAltitude = incomingReadings.altitude;
   incomingTemp = incomingReadings.temp;
   incomingHum = incomingReadings.hum;
@@ -76,7 +79,6 @@ void setup() {
 }
 
 void loop() {
-  // Set values to send
   int ptr = map(analogRead(35), 0, 4095, 0, 180);
   if (ptr >= 100) {
     servoReadings.servo = 180;
@@ -88,38 +90,34 @@ void loop() {
     servoReadings.servo = 0;
   }
   
-
-  // Send message via ESP-NOW
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &servoReadings, sizeof(servoReadings));
    
-  if (result == ESP_OK) {
-    Serial.println("Sent with success");
-  }
-  else {
-    Serial.println("Error sending the data");
-  }
+  // if (result == ESP_OK) {
+  //   Serial.println("Sent with success");
+  // }
+  // else {
+  //   Serial.println("Error sending the data");
+  // }
 
   printValues();
-  delay(1000);
+  //delay(100);
 }
 
 void printValues() {
-  Serial.print("Temperature = ");
-  Serial.print(incomingReadings.temp);
-  Serial.println(" °C");
+  // Serial.print("Temperature = ");
+  // Serial.print(incomingReadings.temp);
+  // Serial.println(" °C");
 
-  Serial.print("Pressure = ");
+  // Serial.print("Pressure = ");
 
-  Serial.print(incomingReadings.pres);
-  Serial.println(" hPa");
+  // Serial.print(incomingReadings.pres);
+  // Serial.println(" hPa");
 
-  Serial.print("Approx. Altitude = ");
+  // Serial.print("Humidity = ");
+  // Serial.print(incomingReadings.hum);
+  // Serial.println(" %");
+
+  Serial.print("ALTITUDE: ");
   Serial.print(incomingReadings.altitude);
   Serial.println(" m");
-
-  Serial.print("Humidity = ");
-  Serial.print(incomingReadings.hum);
-  Serial.println(" %");
-
-  Serial.println();
 }
