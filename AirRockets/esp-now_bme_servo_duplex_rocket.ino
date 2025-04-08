@@ -6,7 +6,7 @@
 #include <ESP32Servo.h>
 
 #define SEALEVELPRESSURE_HPA (1013.25)
-#define SERVO1_PIN D0
+#define SERVO1_PIN D1
 
 Servo servo1;
 String success;
@@ -34,8 +34,8 @@ struct_received incomingReadings;
 esp_now_peer_info_t peerInfo;
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-  Serial.print("\r\nLast Packet Send Status:\t");
-  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+  //Serial.print("\r\nLast Packet Send Status:\t");
+  //Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
   if (status == 0){
     success = "Delivery Success :)";
   }
@@ -46,8 +46,8 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&incomingReadings, incomingData, sizeof(incomingReadings));
-  Serial.print("Bytes received: ");
-  Serial.println(len);
+  //Serial.print("Bytes received: ");
+  //Serial.println(len);
   incomingServo = incomingReadings.servo;
 }
 
@@ -82,23 +82,23 @@ void setup() {
 
 void loop() {
   BME280Readings.altitude = bme.readAltitude(SEALEVELPRESSURE_HPA);
-  BME280Readings.temp = bme.readTemperature();
-  BME280Readings.hum = bme.readHumidity();
-  BME280Readings.pres = bme.readPressure() / 100.0F;
+  //BME280Readings.temp = bme.readTemperature();
+  //BME280Readings.hum = bme.readHumidity();
+  //BME280Readings.pres = bme.readPressure() / 100.0F;
 
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &BME280Readings, sizeof(BME280Readings));
    
-  if (result == ESP_OK) {
-    Serial.println("Sent with success");
-  }
-  else {
-    Serial.println("Error sending the data");
-  }
+  // if (result == ESP_OK) {
+  //   Serial.println("Sent with success");
+  // }
+  // else {
+  //   Serial.println("Error sending the data");
+  // }
 
   servo1.write(int(incomingServo));
-  Serial.println(incomingServo);
+  //Serial.println(incomingServo);
 
-  delay(500);
+  //delay(100);
 }
 
